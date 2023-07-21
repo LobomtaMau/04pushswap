@@ -6,7 +6,7 @@
 #    By: mbaptist <mbaptist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/10 11:11:18 by mbaptist          #+#    #+#              #
-#    Updated: 2023/07/14 12:26:39 by mbaptist         ###   ########.fr        #
+#    Updated: 2023/07/21 14:22:00 by mbaptist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,37 +14,39 @@ NAME = push_swap
 
 SRCS = 	main.c \
 		push_swap.c \
-		auxiliar.c \
+		cmd_push.c \
+		cmd_rev_rotate.c \
+		cmd_rotate.c \
+		cmd_swap.c \
 		errors.c \
-		stack_fill.c \
-		stack_algorithm.c \
-		stack_algorithm2.c \
-		cmd_stack_push.c \
-		cmd_stack_rotate.c \
-		cmd_stack_swap.c \
-		cmd_stack_rev_rotate.c \
+		stack_create.c \
+		stack_checker.c \
+		stack_sort.c \
+		auxiliar.c \
 
-OBJS = $(SRCS:.c=.o)
+SRCS_DIR = src
+OBJS_DIR = obj
 
-ARCHIVE = push_swap.a
+SRCS_PATH = $(addprefix $(SRCS_DIR)/,$(SRCS))
+OBJS_PATH = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-AR = ar -rcs
-RM = rm -fr
+RM = rm -rf
 
-all: $(NAME)
+all: $(OBJS_DIR) $(NAME)
 
-$(NAME) : $(ARCHIVE)
-		$(CC) $< -o $@
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(ARCHIVE): $(OBJS)
-		$(AR) $(ARCHIVE) $^
+$(NAME): $(OBJS_PATH)
+	$(CC) $^ -o $@
 
-%.o : %.c
-		$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
 
 clean:
-		$(RM) $(OBJS) $(ARCHIVE)
+	$(RM) $(OBJS_DIR)
 
 fclean: clean
 		$(RM) $(NAME)

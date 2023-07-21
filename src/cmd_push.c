@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_stack_push.c                                   :+:      :+:    :+:   */
+/*   cmd_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaptist <mbaptist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:19:11 by mbaptist          #+#    #+#             */
-/*   Updated: 2023/07/14 16:43:47 by mbaptist         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:04:21 by mbaptist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,14 @@ static void	push(t_stack_node **dest, t_stack_node **src)
 	}
 }
 
-void	pa(t_stack_node **a, t_stack_node **b, bool checker)
+void	pa(t_stack_node **a, t_stack_node **b)
 {
 	push(a, b);
-	if (!checker)
-		write(1, "pa\n", 3);
+	write(1, "pa\n", 3);
 }
 
-void	pb(t_stack_node **a, t_stack_node **b, bool checker)
+void	pb(t_stack_node **b, t_stack_node **a)
 {
 	push(b, a);
-	if (!checker)
-		write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
 }

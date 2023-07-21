@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_stack_rev_rotate.c                             :+:      :+:    :+:   */
+/*   cmd_rev_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaptist <mbaptist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:13:08 by mbaptist          #+#    #+#             */
-/*   Updated: 2023/07/14 15:43:36 by mbaptist         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:04:00 by mbaptist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rev_rotate(t_stack_node **stack)
+static void	reverse_rotate(t_stack_node **stack)
 {
 	t_stack_node	*last;
 	int				len;
 
 	len = stack_len(*stack);
-	if (!stack || !*stack || len == 1)
+	if (!*stack || !stack || 1 == len)
 		return ;
 	last = find_last_node(*stack);
 	last->prev->next = NULL;
@@ -28,24 +28,21 @@ static void	rev_rotate(t_stack_node **stack)
 	last->next->prev = last;
 }
 
-void	rra(t_stack_node **a, bool checker)
+void	rra(t_stack_node **a)
 {
-	rev_rotate(a);
-	if (!checker)
-		write(1, "rra\n", 4);
+	reverse_rotate(a);
+	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack_node **b, bool checker)
+void	rrb(t_stack_node **b)
 {
-	rev_rotate(b);
-	if (!checker)
-		write(1, "rrb\n", 4);
+	reverse_rotate(b);
+	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b, bool checker)
+void	rrr(t_stack_node **a, t_stack_node **b)
 {
-	rev_rotate(a);
-	rev_rotate(b);
-	if (!checker)
-		write(1, "rrr\n", 4);
+	reverse_rotate(a);
+	reverse_rotate(b);
+	write(1, "rrr\n", 4);
 }

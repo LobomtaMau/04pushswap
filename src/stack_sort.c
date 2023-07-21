@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_algorithm.c                                  :+:      :+:    :+:   */
+/*   stack_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaptist <mbaptist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:26:37 by mbaptist          #+#    #+#             */
-/*   Updated: 2023/07/14 15:55:23 by mbaptist         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:00:05 by mbaptist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	stack_sorted(t_stack_node *stack)
+/* verfica se os valores estao alinhados*/
+bool	is_sorted(t_stack_node *stack)
 {
-	if (stack == NULL)
+	if (!stack)
 		return (1);
 	while (stack->next)
 	{
@@ -25,58 +26,46 @@ bool	stack_sorted(t_stack_node *stack)
 	return (true);
 }
 
-static t_stack_node	*find_high(t_stack_node *stack)
+static t_stack_node	*find_highest(t_stack_node *stack)
 {
-	int				high;
-	t_stack_node	*high_node;
+	int				highest;
+	t_stack_node	*highest_node;
 
-	if (stack == NULL)
+	if (!stack)
 		return (NULL);
-	high = INT_MIN;
+	highest = INT_MIN;
 	while (stack)
 	{
-		if (stack->value > high)
+		if (stack->value > highest)
 		{
-			high = stack->value;
-			high_node = stack;
+			highest = stack->value;
+			highest_node = stack;
 		}
 		stack = stack->next;
 	}
-	return (high_node);
+	return (highest_node);
 }
 
-t_stack_node	*return_cheap(t_stack_node *stack)
-{
-	if (stack == NULL)
-		return (NULL);
-	while (stack)
-	{
-		if (stack->cheap)
-			return (stack);
-		stack = stack->next;
-	}
-	return (NULL);
-}
-
+/* Alinha 3 valores em que o mais alto fica em baixo.*/
 void	sort_3(t_stack_node **a)
 {
-	t_stack_node	*high_node;
+	t_stack_node	*highest_node;
 
-	high_node = find_high(*a);
-	if (*a == high_node)
-		ra(a, false);
-	else if ((*a)->next == high_node)
-		rra(a, false);
+	highest_node = find_highest(*a);
+	if (*a == highest_node)
+		ra(a);
+	else if ((*a)->next == highest_node)
+		rra(a);
 	if ((*a)->value > (*a)->next->value)
-		sa(a, false);
+		sa(a);
 }
 
 void	sort_5(t_stack_node **a, t_stack_node **b)
 {
 	while (stack_len(*a) > 3)
 	{
-		start_nodes(*a, *b);
-		finish_rotate(a, find_small(*a), 'a');
-		pb(b, a, false);
+		init_nodes(*a, *b);
+		finish_rotation(a, find_smallest(*a), 'a');
+		pb(b, a);
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_stack_swap.c                                   :+:      :+:    :+:   */
+/*   cmd_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaptist <mbaptist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:48:17 by mbaptist          #+#    #+#             */
-/*   Updated: 2023/07/14 16:08:41 by mbaptist         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:02:09 by mbaptist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	swap(t_stack_node **top)
 	int	len;
 
 	len = stack_len(*top);
-	if (!top || !*top || len == 1)
+	if (!*top || !top || 1 == len)
 		return ;
 	*top = (*top)->next;
 	(*top)->prev->prev = *top;
@@ -28,24 +28,21 @@ static void	swap(t_stack_node **top)
 	(*top)->prev = NULL;
 }
 
-void	sa(t_stack_node **a, bool checker)
+void	sa(t_stack_node	**a)
 {
 	swap(a);
-	if (!checker)
-		write(1, "sa\n", 3);
+	write(1, "sa\n", 3);
 }
 
-void	sb(t_stack_node **b, bool checker)
+void	sb(t_stack_node **b)
 {
 	swap(b);
-	if (!checker)
-		write(1, "sb\n", 3);
+	write(1, "sb\n", 3);
 }
 
-void	ss(t_stack_node **a, t_stack_node **b, bool checker)
+void	ss(t_stack_node **a, t_stack_node **b)
 {
 	swap(a);
 	swap(b);
-	if (!checker)
-		write(1, "ss\n", 3);
+	write(1, "ss\n", 3);
 }
